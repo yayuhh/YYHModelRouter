@@ -1,0 +1,538 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1702F6861A2D38C80081BE0C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 1702F6851A2D38C80081BE0C /* Podfile */; };
+		17F5DCA61A28EDA100D4D058 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F5DCA51A28EDA100D4D058 /* main.m */; };
+		17F5DCA91A28EDA100D4D058 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F5DCA81A28EDA100D4D058 /* AppDelegate.m */; };
+		17F5DCAC1A28EDA100D4D058 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F5DCAB1A28EDA100D4D058 /* ViewController.m */; };
+		17F5DCAF1A28EDA100D4D058 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17F5DCAD1A28EDA100D4D058 /* Main.storyboard */; };
+		17F5DCB11A28EDA100D4D058 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17F5DCB01A28EDA100D4D058 /* Images.xcassets */; };
+		17F5DCB41A28EDA100D4D058 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17F5DCB21A28EDA100D4D058 /* LaunchScreen.xib */; };
+		17F5DCC01A28EDA100D4D058 /* YYHModelRouterExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F5DCBF1A28EDA100D4D058 /* YYHModelRouterExampleTests.m */; };
+		17F5DCCF1A28EDD400D4D058 /* YYHModelRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F5DCCB1A28EDD400D4D058 /* YYHModelRoute.m */; };
+		17F5DCD01A28EDD400D4D058 /* YYHModelRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F5DCCD1A28EDD400D4D058 /* YYHModelRouter.m */; };
+		17F5DCD51A2909CD00D4D058 /* YYHMantleModelSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F5DCD41A2909CD00D4D058 /* YYHMantleModelSerializer.m */; };
+		C589C6F5A304882843F9FDE2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 866060EF854A923973B01435 /* libPods.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		17F5DCBA1A28EDA100D4D058 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17F5DC981A28EDA100D4D058 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 17F5DC9F1A28EDA100D4D058;
+			remoteInfo = YYHModelRouterExample;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1702F6851A2D38C80081BE0C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
+		17F5DCA01A28EDA100D4D058 /* YYHModelRouterExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YYHModelRouterExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		17F5DCA41A28EDA100D4D058 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17F5DCA51A28EDA100D4D058 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		17F5DCA71A28EDA100D4D058 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		17F5DCA81A28EDA100D4D058 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		17F5DCAA1A28EDA100D4D058 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		17F5DCAB1A28EDA100D4D058 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		17F5DCAE1A28EDA100D4D058 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		17F5DCB01A28EDA100D4D058 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		17F5DCB31A28EDA100D4D058 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		17F5DCB91A28EDA100D4D058 /* YYHModelRouterExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YYHModelRouterExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		17F5DCBE1A28EDA100D4D058 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17F5DCBF1A28EDA100D4D058 /* YYHModelRouterExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YYHModelRouterExampleTests.m; sourceTree = "<group>"; };
+		17F5DCCA1A28EDD400D4D058 /* YYHModelRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYHModelRoute.h; sourceTree = "<group>"; };
+		17F5DCCB1A28EDD400D4D058 /* YYHModelRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYHModelRoute.m; sourceTree = "<group>"; };
+		17F5DCCC1A28EDD400D4D058 /* YYHModelRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYHModelRouter.h; sourceTree = "<group>"; };
+		17F5DCCD1A28EDD400D4D058 /* YYHModelRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYHModelRouter.m; sourceTree = "<group>"; };
+		17F5DCCE1A28EDD400D4D058 /* YYHModelSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYHModelSerialization.h; sourceTree = "<group>"; };
+		17F5DCD31A2909CD00D4D058 /* YYHMantleModelSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYHMantleModelSerializer.h; sourceTree = "<group>"; };
+		17F5DCD41A2909CD00D4D058 /* YYHMantleModelSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYHMantleModelSerializer.m; sourceTree = "<group>"; };
+		624A0DF9BFACE22A25C1F3FC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		866060EF854A923973B01435 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE8E500A07F12E2987DD9BB1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		17F5DC9D1A28EDA100D4D058 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C589C6F5A304882843F9FDE2 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17F5DCB61A28EDA100D4D058 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		17F5DC971A28EDA100D4D058 = {
+			isa = PBXGroup;
+			children = (
+				17F5DCD11A2909B200D4D058 /* Serializers */,
+				17F5DCC91A28EDD400D4D058 /* YYHModelRouter */,
+				17F5DCA21A28EDA100D4D058 /* YYHModelRouterExample */,
+				17F5DCBC1A28EDA100D4D058 /* YYHModelRouterExampleTests */,
+				17F5DCA11A28EDA100D4D058 /* Products */,
+				9BA3D616B3374D067DEB28AA /* Pods */,
+				265B1C51436D02E6780EADC4 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		17F5DCA11A28EDA100D4D058 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				17F5DCA01A28EDA100D4D058 /* YYHModelRouterExample.app */,
+				17F5DCB91A28EDA100D4D058 /* YYHModelRouterExampleTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		17F5DCA21A28EDA100D4D058 /* YYHModelRouterExample */ = {
+			isa = PBXGroup;
+			children = (
+				1702F6851A2D38C80081BE0C /* Podfile */,
+				17F5DCA71A28EDA100D4D058 /* AppDelegate.h */,
+				17F5DCA81A28EDA100D4D058 /* AppDelegate.m */,
+				17F5DCAA1A28EDA100D4D058 /* ViewController.h */,
+				17F5DCAB1A28EDA100D4D058 /* ViewController.m */,
+				17F5DCAD1A28EDA100D4D058 /* Main.storyboard */,
+				17F5DCB01A28EDA100D4D058 /* Images.xcassets */,
+				17F5DCB21A28EDA100D4D058 /* LaunchScreen.xib */,
+				17F5DCA31A28EDA100D4D058 /* Supporting Files */,
+			);
+			path = YYHModelRouterExample;
+			sourceTree = "<group>";
+		};
+		17F5DCA31A28EDA100D4D058 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				17F5DCA41A28EDA100D4D058 /* Info.plist */,
+				17F5DCA51A28EDA100D4D058 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		17F5DCBC1A28EDA100D4D058 /* YYHModelRouterExampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				17F5DCBF1A28EDA100D4D058 /* YYHModelRouterExampleTests.m */,
+				17F5DCBD1A28EDA100D4D058 /* Supporting Files */,
+			);
+			path = YYHModelRouterExampleTests;
+			sourceTree = "<group>";
+		};
+		17F5DCBD1A28EDA100D4D058 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				17F5DCBE1A28EDA100D4D058 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		17F5DCC91A28EDD400D4D058 /* YYHModelRouter */ = {
+			isa = PBXGroup;
+			children = (
+				17F5DCCC1A28EDD400D4D058 /* YYHModelRouter.h */,
+				17F5DCCD1A28EDD400D4D058 /* YYHModelRouter.m */,
+				17F5DCCA1A28EDD400D4D058 /* YYHModelRoute.h */,
+				17F5DCCB1A28EDD400D4D058 /* YYHModelRoute.m */,
+				17F5DCCE1A28EDD400D4D058 /* YYHModelSerialization.h */,
+			);
+			path = YYHModelRouter;
+			sourceTree = "<group>";
+		};
+		17F5DCD11A2909B200D4D058 /* Serializers */ = {
+			isa = PBXGroup;
+			children = (
+				17F5DCD21A2909B200D4D058 /* Mantle */,
+			);
+			path = Serializers;
+			sourceTree = "<group>";
+		};
+		17F5DCD21A2909B200D4D058 /* Mantle */ = {
+			isa = PBXGroup;
+			children = (
+				17F5DCD31A2909CD00D4D058 /* YYHMantleModelSerializer.h */,
+				17F5DCD41A2909CD00D4D058 /* YYHMantleModelSerializer.m */,
+			);
+			path = Mantle;
+			sourceTree = "<group>";
+		};
+		265B1C51436D02E6780EADC4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				866060EF854A923973B01435 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9BA3D616B3374D067DEB28AA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AE8E500A07F12E2987DD9BB1 /* Pods.debug.xcconfig */,
+				624A0DF9BFACE22A25C1F3FC /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		17F5DC9F1A28EDA100D4D058 /* YYHModelRouterExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17F5DCC31A28EDA100D4D058 /* Build configuration list for PBXNativeTarget "YYHModelRouterExample" */;
+			buildPhases = (
+				26CE435C54BC2A85B9B61F74 /* Check Pods Manifest.lock */,
+				17F5DC9C1A28EDA100D4D058 /* Sources */,
+				17F5DC9D1A28EDA100D4D058 /* Frameworks */,
+				17F5DC9E1A28EDA100D4D058 /* Resources */,
+				7B2B2312291750B5934A89BE /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YYHModelRouterExample;
+			productName = YYHModelRouterExample;
+			productReference = 17F5DCA01A28EDA100D4D058 /* YYHModelRouterExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+		17F5DCB81A28EDA100D4D058 /* YYHModelRouterExampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17F5DCC61A28EDA100D4D058 /* Build configuration list for PBXNativeTarget "YYHModelRouterExampleTests" */;
+			buildPhases = (
+				17F5DCB51A28EDA100D4D058 /* Sources */,
+				17F5DCB61A28EDA100D4D058 /* Frameworks */,
+				17F5DCB71A28EDA100D4D058 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				17F5DCBB1A28EDA100D4D058 /* PBXTargetDependency */,
+			);
+			name = YYHModelRouterExampleTests;
+			productName = YYHModelRouterExampleTests;
+			productReference = 17F5DCB91A28EDA100D4D058 /* YYHModelRouterExampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		17F5DC981A28EDA100D4D058 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = Yayuhh;
+				TargetAttributes = {
+					17F5DC9F1A28EDA100D4D058 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					17F5DCB81A28EDA100D4D058 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 17F5DC9F1A28EDA100D4D058;
+					};
+				};
+			};
+			buildConfigurationList = 17F5DC9B1A28EDA100D4D058 /* Build configuration list for PBXProject "YYHModelRouterExample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 17F5DC971A28EDA100D4D058;
+			productRefGroup = 17F5DCA11A28EDA100D4D058 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				17F5DC9F1A28EDA100D4D058 /* YYHModelRouterExample */,
+				17F5DCB81A28EDA100D4D058 /* YYHModelRouterExampleTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		17F5DC9E1A28EDA100D4D058 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17F5DCAF1A28EDA100D4D058 /* Main.storyboard in Resources */,
+				17F5DCB41A28EDA100D4D058 /* LaunchScreen.xib in Resources */,
+				1702F6861A2D38C80081BE0C /* Podfile in Resources */,
+				17F5DCB11A28EDA100D4D058 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17F5DCB71A28EDA100D4D058 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		26CE435C54BC2A85B9B61F74 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7B2B2312291750B5934A89BE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		17F5DC9C1A28EDA100D4D058 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17F5DCCF1A28EDD400D4D058 /* YYHModelRoute.m in Sources */,
+				17F5DCD51A2909CD00D4D058 /* YYHMantleModelSerializer.m in Sources */,
+				17F5DCAC1A28EDA100D4D058 /* ViewController.m in Sources */,
+				17F5DCD01A28EDD400D4D058 /* YYHModelRouter.m in Sources */,
+				17F5DCA91A28EDA100D4D058 /* AppDelegate.m in Sources */,
+				17F5DCA61A28EDA100D4D058 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17F5DCB51A28EDA100D4D058 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17F5DCC01A28EDA100D4D058 /* YYHModelRouterExampleTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		17F5DCBB1A28EDA100D4D058 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 17F5DC9F1A28EDA100D4D058 /* YYHModelRouterExample */;
+			targetProxy = 17F5DCBA1A28EDA100D4D058 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		17F5DCAD1A28EDA100D4D058 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17F5DCAE1A28EDA100D4D058 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		17F5DCB21A28EDA100D4D058 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17F5DCB31A28EDA100D4D058 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		17F5DCC11A28EDA100D4D058 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		17F5DCC21A28EDA100D4D058 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		17F5DCC41A28EDA100D4D058 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE8E500A07F12E2987DD9BB1 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = YYHModelRouterExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		17F5DCC51A28EDA100D4D058 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 624A0DF9BFACE22A25C1F3FC /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = YYHModelRouterExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		17F5DCC71A28EDA100D4D058 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = YYHModelRouterExampleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YYHModelRouterExample.app/YYHModelRouterExample";
+			};
+			name = Debug;
+		};
+		17F5DCC81A28EDA100D4D058 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = YYHModelRouterExampleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YYHModelRouterExample.app/YYHModelRouterExample";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		17F5DC9B1A28EDA100D4D058 /* Build configuration list for PBXProject "YYHModelRouterExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17F5DCC11A28EDA100D4D058 /* Debug */,
+				17F5DCC21A28EDA100D4D058 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		17F5DCC31A28EDA100D4D058 /* Build configuration list for PBXNativeTarget "YYHModelRouterExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17F5DCC41A28EDA100D4D058 /* Debug */,
+				17F5DCC51A28EDA100D4D058 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		17F5DCC61A28EDA100D4D058 /* Build configuration list for PBXNativeTarget "YYHModelRouterExampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17F5DCC71A28EDA100D4D058 /* Debug */,
+				17F5DCC81A28EDA100D4D058 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 17F5DC981A28EDA100D4D058 /* Project object */;
+}
