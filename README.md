@@ -1,7 +1,7 @@
 YYHModelRouter
 ==========
 
-A lightweight utility built on top of AFNetworking for interacting with model objects over RESTful HTTP services.
+A lightweight utility built on top of [AFNetworking](https://github.com/AFNetworking/AFNetworking) for interacting with model objects over RESTful HTTP services.
 Provides endpoint-based configuration for automatically serializing JSON request/response payloads into model objects. By default [Mantle](https://github.com/Mantle/Mantle) is used to serialize model objects but custom model serializers can easily be built to work with any model framework.
 
 ## Installation
