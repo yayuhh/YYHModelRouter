@@ -12,5 +12,7 @@
 
 - (id)modelsForJSONArray:(NSArray *)jsonArray modelClass:(Class)modelClass error:(NSError **)error;
 - (id)modelForJSONDictionary:(NSDictionary *)jsonDictionary modelClass:(Class)modelClass error:(NSError **)error;
+- (NSDictionary *)JSONDictionaryWithModel:(id)model;
+- (NSArray *)JSONArrayWithModels:(NSArray *)models;
 
 @end
