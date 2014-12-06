@@ -22,4 +22,12 @@
     return [MTLJSONAdapter modelsOfClass:modelClass fromJSONArray:jsonArray error:error];
 }
 
+- (NSArray *)JSONArrayWithModels:(NSArray *)models {
+    return [MTLJSONAdapter JSONArrayFromModels:models];
+}
+
+- (NSDictionary *)JSONDictionaryWithModel:(id)model {
+    return [MTLJSONAdapter JSONDictionaryFromModel:model];
+}
+
 @end
