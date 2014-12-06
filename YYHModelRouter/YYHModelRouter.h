@@ -60,23 +60,41 @@ typedef void (^YYHModelRequestFailure)(NSError *error);
 /**
  Send a GET request and serialize the response as a model object.
  */
-- (void)GET:(NSString *)path parameters:(NSDictionary *)parameters success:(YYHModelRequestSuccess)success failure:(YYHModelRequestFailure)failure;
+- (void)GET:(NSString *)path
+ parameters:(NSDictionary *)parameters
+    success:(YYHModelRequestSuccess)success
+    failure:(YYHModelRequestFailure)failure;
 
 /**
  Send a POST request and serialize the response as a model object.
  */
-- (void)POST:(NSString *)path parameters:(NSDictionary *)parameters success:(YYHModelRequestSuccess)success failure:(YYHModelRequestFailure)failure;
+- (void)POST:(NSString *)path
+       model:(id)model
+     success:(YYHModelRequestSuccess)success
+     failure:(YYHModelRequestFailure)failure;
 
 /**
  Send a PUT request and serialize the response as a model object.
  */
-- (void)PUT:(NSString *)path parameters:(NSDictionary *)parameters success:(YYHModelRequestSuccess)success failure:(YYHModelRequestFailure)failure;
+- (void)PUT:(NSString *)path
+      model:(id)model
+    success:(YYHModelRequestSuccess)success
+    failure:(YYHModelRequestFailure)failure;
 
 /**
  Send a DELETE request and serialize the response as a model object.
  */
-- (void)DELETE:(NSString *)path parameters:(NSDictionary *)parameters success:(YYHModelRequestSuccess)success failure:(YYHModelRequestFailure)failure;
+- (void)DELETE:(NSString *)path
+         model:(id)model
+       success:(YYHModelRequestSuccess)success
+       failure:(YYHModelRequestFailure)failure;
 
+/**
+ Constructs a request path from a model path. Override to customize the request path
+ that will be used to construct the final URL of the HTTP request.
+ @param modelPath Relative path
+ @return Path used to along with the baseURL to construct the final URL of the HTTP request.
+ */
 - (NSString *)requestPathForModelPath:(NSString *)modelPath;
 
 @end

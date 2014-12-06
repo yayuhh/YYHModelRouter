@@ -168,32 +168,32 @@ NSString * const YYHModelRouterErrorDomain = @"com.yayuhh.YYHModelRouterError";
                      failure:[self requestFailureBlockWithModelRoute:modelRoute success:success failure:failure]];
 }
 
-- (void)POST:(NSString *)path parameters:(NSDictionary *)parameters success:(YYHModelRequestSuccess)success failure:(YYHModelRequestFailure)failure {
+- (void)POST:(NSString *)path model:(id)model success:(YYHModelRequestSuccess)success failure:(YYHModelRequestFailure)failure {
     YYHModelRoute *modelRoute = [self modelRouteForPath:path method:[YYHModelRoute postRequestMethod]];
     NSAssert(modelRoute != nil, @"Could not find modelRoute for path \"%@\"", path);
     
     [self.sessionManager POST:[self requestPathForModelPath:path]
-                  parameters:parameters
+                  parameters:[self JSONPayloadForModel:model]
                      success:[self requestSuccessBlockWithModelRoute:modelRoute success:success failure:failure]
                      failure:[self requestFailureBlockWithModelRoute:modelRoute success:success failure:failure]];
 }
 
-- (void)PUT:(NSString *)path parameters:(NSDictionary *)parameters success:(YYHModelRequestSuccess)success failure:(YYHModelRequestFailure)failure {
+- (void)PUT:(NSString *)path model:(id)model success:(YYHModelRequestSuccess)success failure:(YYHModelRequestFailure)failure {
     YYHModelRoute *modelRoute = [self modelRouteForPath:path method:[YYHModelRoute putRequestMethod]];
     NSAssert(modelRoute != nil, @"Could not find modelRoute for path \"%@\"", path);
     
     [self.sessionManager PUT:[self requestPathForModelPath:path]
-                   parameters:parameters
+                   parameters:[self JSONPayloadForModel:model]
                       success:[self requestSuccessBlockWithModelRoute:modelRoute success:success failure:failure]
                       failure:[self requestFailureBlockWithModelRoute:modelRoute success:success failure:failure]];
 }
 
-- (void)DELETE:(NSString *)path parameters:(NSDictionary *)parameters success:(YYHModelRequestSuccess)success failure:(YYHModelRequestFailure)failure {
+- (void)DELETE:(NSString *)path model:(id)model success:(YYHModelRequestSuccess)success failure:(YYHModelRequestFailure)failure {
     YYHModelRoute *modelRoute = [self modelRouteForPath:path method:[YYHModelRoute deleteRequestMethod]];
     NSAssert(modelRoute != nil, @"Could not find modelRoute for path \"%@\"", path);
     
     [self.sessionManager DELETE:[self requestPathForModelPath:path]
-                     parameters:parameters
+                     parameters:[self JSONPayloadForModel:model]
                         success:[self requestSuccessBlockWithModelRoute:modelRoute success:success failure:failure]
                         failure:[self requestFailureBlockWithModelRoute:modelRoute success:success failure:failure]];
 }
@@ -237,7 +237,47 @@ NSString * const YYHModelRouterErrorDomain = @"com.yayuhh.YYHModelRouterError";
     };
 }
 
-#pragma mark - Serialization
+#pragma mark - Serialization - Request
+
+- (NSDictionary *)JSONPayloadForModel:(id)model {
+    id modelJSON = [self modelJSONForModel:model];
+    
+    if (!modelJSON) {
+        return nil;
+    }
+    
+    NSMutableDictionary *jsonPayload = [[NSMutableDictionary alloc] init];
+    [jsonPayload setValue:modelJSON forKeyPath:nil];
+    return [jsonPayload copy];
+}
+
+- (id)modelJSONForModel:(id)model {
+    if ([model isKindOfClass:[NSArray class]]) {
+        return [self JSONArrayForModels:model];;
+    } else if ([model isKindOfClass:[NSDictionary class]]) {
+        return model;
+    } else {
+        return nil;
+    }
+}
+
+- (NSArray *)JSONArrayForModels:(NSArray *)models {
+    if (self.modelSerializer) {
+        return [self.modelSerializer JSONArrayWithModels:models];
+    } else {
+        return models;
+    }
+}
+
+- (NSDictionary *)JSONDictionaryForModel:(id)model {
+    if (self.modelSerializer) {
+        return [self.modelSerializer JSONDictionaryWithModel:model];
+    } else {
+        return model;
+    }
+}
+
+#pragma mark - Serialization - Response
 
 - (id)serializedModelForResponseObject:(id)responseObject modelClass:(Class)modelClass error:(NSError **)error {
     if ([responseObject isKindOfClass:[NSDictionary class]]) {
