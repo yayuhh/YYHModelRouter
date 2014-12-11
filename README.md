@@ -21,7 +21,7 @@ Route responses of `GET` requests that match the path pattern `@"/users/:userID"
     YYHModelRouter *modelRouter = [[YYHModelRouter alloc] initWithBaseURL:[NSURL URLWithString:@"http://foo.bar"]];
     [modelRouter routeGET:@"/user/:userId" responseModelClass:[UserModel class] responseKeyPath:@"user"];
 
-### Requesting Models
+### Requesting Model Data
 
 Send a get request for `@"/users/12345"` and serialize the response as a `UserModel` object.
 
@@ -32,6 +32,8 @@ Send a get request for `@"/users/12345"` and serialize the response as a `UserMo
     } failure:^(NSError *error) {
 
     }];
+
+### Sending Model Data
 
 Send a `POST` request and serialize the model as JSON in the request body.
 
