@@ -25,37 +25,59 @@ typedef void (^YYHModelRequestFailure)(NSError *error);
  */
 - (instancetype)initWithBaseURL:(NSURL *)url;
 
+
 /**
- Add a route for a GET request.
- @param pathPattern Request path pattern.
- @param modelClass Class of model to load for this route.
- @param keyPath Key path of JSON value used to serialize model.
+ Add a route for a GET response.
+ @param pathPattern Path pattern that matches the path of the originating request.
+ @param responseModelClass Class of model that will be used to serialize the response.
+ @param responseKeyPath Key path of JSON value that will be used serialized as the model.
  */
-- (void)routeGET:(NSString * )pathPattern modelClass:(Class)modelClass keyPath:(NSString *)keyPath;
+- (void)routeGET:(NSString *)pathPattern responseModelClass:(Class)responseModelClass responseKeyPath:(NSString *)responseKeyPath;
 
 /**
  Add a route for a POST request.
- @param pathPattern Request path pattern.
- @param modelClass Class of model to load for this route.
- @param keyPath Key path of JSON value used to serialize model.
+ @param pathPattern Path pattern that matches the path of the request.
+ @param requestKeyPath Optional key path to use when setting the value of the JSON payload.
  */
-- (void)routePOST:(NSString * )pathPattern modelClass:(Class)modelClass keyPath:(NSString *)keyPath;
+- (void)routePOST:(NSString *)pathPattern requestKeyPath:(NSString *)requestKeyPath;
+
+/**
+ Add a route for a POST response.
+ @param pathPattern Path pattern that matches the path of the originating request.
+ @param responseModelClass Class of model that will be used to serialize the response.
+ @param responseKeyPath Key path of JSON value that will be used serialized as the model.
+ */
+- (void)routePOST:(NSString *)pathPattern responseModelClass:(Class)responseModelClass responseKeyPath:(NSString *)responseKeyPath;
 
 /**
  Add a route for a PUT request.
- @param pathPattern Request path pattern.
- @param modelClass Class of model to load for this route.
- @param keyPath Key path of JSON value used to serialize model.
+ @param pathPattern Path pattern that matches the path of the request.
+ @param requestKeyPath Optional key path to use when setting the value of the JSON payload.
  */
-- (void)routePUT:(NSString * )pathPattern modelClass:(Class)modelClass keyPath:(NSString *)keyPath;
+- (void)routePUT:(NSString *)pathPattern requestKeyPath:(NSString *)requestKeyPath;
+
+/**
+ Add a route for a POST response.
+ @param pathPattern Path pattern that matches the path of the originating request.
+ @param responseModelClass Class of model that will be used to serialize the response.
+ @param responseKeyPath Key path of JSON value that will be used serialized as the model.
+ */
+- (void)routePUT:(NSString *)pathPattern responseModelClass:(Class)responseModelClass responseKeyPath:(NSString *)responseKeyPath;
 
 /**
  Add a route for a DELETE request.
- @param pathPattern Request path pattern.
- @param modelClass Class of model to load for this route.
- @param keyPath Key path of JSON value used to serialize model.
+ @param pathPattern Path pattern that matches the path of the request.
+ @param requestKeyPath Optional key path to use when setting the value of the JSON payload.
  */
-- (void)routeDELETE:(NSString * )pathPattern modelClass:(Class)modelClass keyPath:(NSString *)keyPath;
+- (void)routeDELETE:(NSString *)pathPattern requestKeyPath:(NSString *)requestKeyPath;
+
+/**
+ Add a route for a POST response.
+ @param pathPattern Path pattern that matches the path of the originating request.
+ @param responseModelClass Class of model that will be used to serialize the response.
+ @param responseKeyPath Key path of JSON value that will be used serialized as the model.
+ */
+- (void)routeDELETE:(NSString *)pathPattern responseModelClass:(Class)responseModelClass responseKeyPath:(NSString *)responseKeyPath;
 
 /**
  Send a GET request and serialize the response as a model object.

@@ -16,15 +16,25 @@ For use without [Mantle](https://github.com/Mantle/Mantle) install the `core` su
 
 ### Adding Routes
 
+Route responses of `GET` requests that match the path pattern `@"/users/:userID"` to the model class `UserModel`.
+
     YYHModelRouter *modelRouter = [[YYHModelRouter alloc] initWithBaseURL:[NSURL URLWithString:@"http://foo.bar"]];
-    [modelRouter routeGET:@"/user/:userId" modelClass:[UserModel class] keyPath:@"user"];
+    [modelRouter routeGET:@"/user/:userId" responseModelClass:[UserModel class] responseKeyPath:@"user"];
 
 ### Requesting Models
 
-    YYHModelRouter *modelRouter
+Send a get request for `@"/users/12345"` and serialize the response as a `UserModel` object.
+
+    YYHModelRouter *modelRouter;
     [modelRouter GET:@"/users/12345" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject, id model) {
         UserModel *user = model;
         self.userView.nameLabel.text = user.name;
     } failure:^(NSError *error) {
 
     }];
+
+Send a `POST` request and serialize the model as JSON in the request body.
+
+    Comment *comment = [[Comment alloc] init]
+    comment.message = @"YAYUHH";
+    [modelRouter POST:@"/comments" model:comment success:success failure:failure];

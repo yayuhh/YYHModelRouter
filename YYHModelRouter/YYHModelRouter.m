@@ -17,8 +17,8 @@
 #endif
 #endif
 
-const NSInteger YYHModelRouterErrorSerialization = 1;
-NSString * const YYHModelRouterErrorDomain = @"com.yayuhh.YYHModelRouterError";
+NSString * const YYHModelRouteGroupTypRequest = @"YYHModelRouteGroupTypRequest";
+NSString * const YYHModelRouteGroupTypeResponse = @"YYHModelRouteGroupTypeResponse";
 
 @interface YYHModelRouteGroup : NSObject
 
@@ -43,6 +43,7 @@ NSString * const YYHModelRouterErrorDomain = @"com.yayuhh.YYHModelRouterError";
     } else if ([requestMethod isEqualToString:[YYHModelRoute deleteRequestMethod]]) {
         return self.deleteRoute;
     }
+    
     return nil;
 }
 
@@ -52,7 +53,8 @@ NSString * const YYHModelRouterErrorDomain = @"com.yayuhh.YYHModelRouterError";
 
 @property (nonatomic, strong, readwrite) NSURL *baseURL;
 @property (nonatomic, strong, readwrite) AFHTTPSessionManager *sessionManager;
-@property (nonatomic, strong) NSMutableDictionary *routeMap;
+@property (nonatomic, strong) NSMutableDictionary *requestRouteMap;
+@property (nonatomic, strong) NSMutableDictionary *responseRouteMap;
 
 @end
 
@@ -72,40 +74,86 @@ NSString * const YYHModelRouterErrorDomain = @"com.yayuhh.YYHModelRouterError";
     return self;
 }
 
-#pragma mark - Routing Internals
+#pragma mark - Routing Core
 
-- (NSMutableDictionary *)routeMap {
-    if (!_routeMap) {
-        _routeMap = [[NSMutableDictionary alloc] init];
+- (YYHModelRouteGroup *)routeGroupForPathPattern:(NSString *)pathPattern groupType:(NSString *)groupType {
+    YYHModelRouteGroup *group;
+    
+    if ([groupType isEqualToString:YYHModelRouteGroupTypRequest]) {
+        group = self.requestRouteMap[pathPattern];
+    } else if ([groupType isEqualToString:YYHModelRouteGroupTypeResponse]) {
+        group = self.responseRouteMap[pathPattern];
     }
-
-    return _routeMap;
-}
-
-- (YYHModelRouteGroup *)routeGroupForPathPattern:(NSString *)pathPattern {
-    YYHModelRouteGroup *group = self.routeMap[pathPattern];
     
     if (!group) {
         group = [[YYHModelRouteGroup alloc] init];
-        self.routeMap[pathPattern] = group;
+        
+        if ([groupType isEqualToString:YYHModelRouteGroupTypRequest]) {
+            self.requestRouteMap[pathPattern] = group;
+        } else if ([groupType isEqualToString:YYHModelRouteGroupTypeResponse]) {
+            self.responseRouteMap[pathPattern] = group;
+        }
     }
     
     return group;
 }
 
-- (YYHModelRouteGroup *)routeGroupForPath:(NSString *)path {
-    for (NSString *testPathPattern in self.routeMap) {
+- (YYHModelRouteGroup *)routeGroupForPath:(NSString *)path groupType:(NSString *)groupType {
+    NSDictionary *routeMap;
+    
+    if ([groupType isEqualToString:YYHModelRouteGroupTypRequest]) {
+        routeMap = self.requestRouteMap;
+    } else if ([groupType isEqualToString:YYHModelRouteGroupTypeResponse]) {
+        routeMap = self.responseRouteMap;
+    }
+    
+    for (NSString *testPathPattern in routeMap) {
         if ([self pathPattern:testPathPattern matchesPath:path]) {
-            return self.routeMap[testPathPattern];
+            return routeMap[testPathPattern];
         }
     }
     
     return nil;
 }
 
-- (YYHModelRoute *)modelRouteForPath:(NSString *)path method:(NSString *)method {
-    YYHModelRouteGroup *routeGroup = [self routeGroupForPath:path];
-    return [routeGroup routeForRequestMethod:method];
+- (YYHModelRoute *)modelRouteForPath:(NSString *)path method:(NSString *)method groupType:(NSString *)groupType {
+    return [[self routeGroupForPath:path groupType:groupType] routeForRequestMethod:method];
+}
+
+#pragma mark - Request Routing
+
+- (NSMutableDictionary *)requestRouteMap {
+    if (!_requestRouteMap) {
+        _requestRouteMap = [[NSMutableDictionary alloc] init];
+    }
+
+    return _requestRouteMap;
+}
+
+- (YYHModelRouteGroup *)requestRouteGroupForPathPattern:(NSString *)pathPattern {
+    return [self routeGroupForPathPattern:pathPattern groupType:YYHModelRouteGroupTypRequest];
+}
+
+- (YYHModelRoute *)requestModelRouteForPath:(NSString *)path method:(NSString *)method {
+    return [self modelRouteForPath:path method:method groupType:YYHModelRouteGroupTypRequest];
+}
+
+#pragma mark - Response Routing
+
+- (NSMutableDictionary *)responseRouteMap {
+    if (!_responseRouteMap) {
+        _responseRouteMap = [[NSMutableDictionary alloc] init];
+    }
+    
+    return _responseRouteMap;
+}
+
+- (YYHModelRouteGroup *)responseRouteGroupForPathPattern:(NSString *)pathPattern {
+    return [self routeGroupForPathPattern:pathPattern groupType:YYHModelRouteGroupTypeResponse];
+}
+
+- (YYHModelRoute *)responseModelRouteForPath:(NSString *)path method:(NSString *)method {
+    return [self modelRouteForPath:path method:method groupType:YYHModelRouteGroupTypeResponse];
 }
 
 #pragma mark - Path Matching
@@ -140,96 +188,102 @@ NSString * const YYHModelRouterErrorDomain = @"com.yayuhh.YYHModelRouterError";
 
 #pragma mark - Routing API
 
-- (void)routeGET:(NSString * )pathPattern modelClass:(Class)modelClass keyPath:(NSString *)keyPath {
-    [self routeGroupForPathPattern:pathPattern].getRoute = [YYHModelRoute GETRouteWithModelClass:modelClass keyPath:keyPath];
+- (void)routeGET:(NSString *)pathPattern responseModelClass:(Class)responseModelClass responseKeyPath:(NSString *)responseKeyPath {
+    [self responseRouteGroupForPathPattern:pathPattern].getRoute = [YYHModelRoute GETRouteWithModelClass:responseModelClass keyPath:responseKeyPath];
+
 }
 
-- (void)routePOST:(NSString * )pathPattern modelClass:(Class)modelClass keyPath:(NSString *)keyPath {
-    [self routeGroupForPathPattern:pathPattern].postRoute = [YYHModelRoute POSTRouteWithModelClass:modelClass keyPath:keyPath];
+- (void)routePOST:(NSString *)pathPattern requestKeyPath:(NSString *)requestKeyPath {
+    [self requestRouteGroupForPathPattern:pathPattern].postRoute = [YYHModelRoute GETRouteWithModelClass:Nil keyPath:requestKeyPath];
 }
 
-- (void)routePUT:(NSString * )pathPattern modelClass:(Class)modelClass keyPath:(NSString *)keyPath {
-    [self routeGroupForPathPattern:pathPattern].putRoute = [YYHModelRoute PUTRouteWithModelClass:modelClass keyPath:keyPath];
+- (void)routePOST:(NSString *)pathPattern responseModelClass:(Class)responseModelClass responseKeyPath:(NSString *)responseKeyPath {
+    [self responseRouteGroupForPathPattern:pathPattern].postRoute = [YYHModelRoute GETRouteWithModelClass:responseModelClass keyPath:responseKeyPath];
+    
 }
 
-- (void)routeDELETE:(NSString * )pathPattern modelClass:(Class)modelClass keyPath:(NSString *)keyPath {
-    [self routeGroupForPathPattern:pathPattern].deleteRoute = [YYHModelRoute DELETERouteWithModelClass:modelClass keyPath:keyPath];
+- (void)routePUT:(NSString *)pathPattern requestKeyPath:(NSString *)requestKeyPath {
+    [self requestRouteGroupForPathPattern:pathPattern].putRoute = [YYHModelRoute GETRouteWithModelClass:Nil keyPath:requestKeyPath];
+}
+
+- (void)routePUT:(NSString *)pathPattern responseModelClass:(Class)responseModelClass responseKeyPath:(NSString *)responseKeyPath {
+    [self responseRouteGroupForPathPattern:pathPattern].putRoute = [YYHModelRoute GETRouteWithModelClass:responseModelClass keyPath:responseKeyPath];
+}
+
+- (void)routeDELETE:(NSString *)pathPattern requestKeyPath:(NSString *)requestKeyPath {
+    [self requestRouteGroupForPathPattern:pathPattern].deleteRoute = [YYHModelRoute GETRouteWithModelClass:Nil keyPath:requestKeyPath];
+}
+
+- (void)routeDELETE:(NSString *)pathPattern responseModelClass:(Class)responseModelClass responseKeyPath:(NSString *)responseKeyPath {
+    [self responseRouteGroupForPathPattern:pathPattern].deleteRoute = [YYHModelRoute GETRouteWithModelClass:responseModelClass keyPath:responseKeyPath];
 }
 
 #pragma mark - Model Request API
 
 - (void)GET:(NSString *)path parameters:(NSDictionary *)parameters success:(YYHModelRequestSuccess)success failure:(YYHModelRequestFailure)failure {
-    YYHModelRoute *modelRoute = [self modelRouteForPath:path method:[YYHModelRoute getRequestMethod]];
-    NSAssert(modelRoute != nil, @"Could not find modelRoute for path \"%@\"", path);
+    YYHModelRoute *modelRoute = [self responseModelRouteForPath:path method:[YYHModelRoute getRequestMethod]];
+    NSAssert(modelRoute != nil, @"Could not find model route for GET request path \"%@\"", path);
     
     [self.sessionManager GET:[self requestPathForModelPath:path]
                   parameters:parameters
-                     success:[self requestSuccessBlockWithModelRoute:modelRoute success:success failure:failure]
-                     failure:[self requestFailureBlockWithModelRoute:modelRoute success:success failure:failure]];
+                     success:[self requestSuccessBlockWithResponseRoute:modelRoute success:success failure:failure]
+                     failure:[self requestFailureBlockWithFailure:failure]];
 }
 
 - (void)POST:(NSString *)path model:(id)model success:(YYHModelRequestSuccess)success failure:(YYHModelRequestFailure)failure {
-    YYHModelRoute *modelRoute = [self modelRouteForPath:path method:[YYHModelRoute postRequestMethod]];
-    NSAssert(modelRoute != nil, @"Could not find modelRoute for path \"%@\"", path);
-    
+    YYHModelRoute *requestRoute = [self requestModelRouteForPath:path method:[YYHModelRoute postRequestMethod]];
+    YYHModelRoute *responseRoute = [self responseModelRouteForPath:path method:[YYHModelRoute postRequestMethod]];
+
     [self.sessionManager POST:[self requestPathForModelPath:path]
-                  parameters:[self JSONPayloadForModel:model]
-                     success:[self requestSuccessBlockWithModelRoute:modelRoute success:success failure:failure]
-                     failure:[self requestFailureBlockWithModelRoute:modelRoute success:success failure:failure]];
+                  parameters:[self JSONPayloadForModel:model requestRoute:requestRoute]
+                     success:[self requestSuccessBlockWithResponseRoute:responseRoute success:success failure:failure]
+                     failure:[self requestFailureBlockWithFailure:failure]];
 }
 
 - (void)PUT:(NSString *)path model:(id)model success:(YYHModelRequestSuccess)success failure:(YYHModelRequestFailure)failure {
-    YYHModelRoute *modelRoute = [self modelRouteForPath:path method:[YYHModelRoute putRequestMethod]];
-    NSAssert(modelRoute != nil, @"Could not find modelRoute for path \"%@\"", path);
-    
+    YYHModelRoute *requestRoute = [self requestModelRouteForPath:path method:[YYHModelRoute putRequestMethod]];
+    YYHModelRoute *responseRoute = [self responseModelRouteForPath:path method:[YYHModelRoute putRequestMethod]];
+
     [self.sessionManager PUT:[self requestPathForModelPath:path]
-                   parameters:[self JSONPayloadForModel:model]
-                      success:[self requestSuccessBlockWithModelRoute:modelRoute success:success failure:failure]
-                      failure:[self requestFailureBlockWithModelRoute:modelRoute success:success failure:failure]];
+                   parameters:[self JSONPayloadForModel:model requestRoute:requestRoute]
+                      success:[self requestSuccessBlockWithResponseRoute:responseRoute success:success failure:failure]
+                      failure:[self requestFailureBlockWithFailure:failure]];
 }
 
 - (void)DELETE:(NSString *)path model:(id)model success:(YYHModelRequestSuccess)success failure:(YYHModelRequestFailure)failure {
-    YYHModelRoute *modelRoute = [self modelRouteForPath:path method:[YYHModelRoute deleteRequestMethod]];
-    NSAssert(modelRoute != nil, @"Could not find modelRoute for path \"%@\"", path);
+    YYHModelRoute *requestRoute = [self requestModelRouteForPath:path method:[YYHModelRoute deleteRequestMethod]];
+    YYHModelRoute *responseRoute = [self responseModelRouteForPath:path method:[YYHModelRoute deleteRequestMethod]];
     
     [self.sessionManager DELETE:[self requestPathForModelPath:path]
-                     parameters:[self JSONPayloadForModel:model]
-                        success:[self requestSuccessBlockWithModelRoute:modelRoute success:success failure:failure]
-                        failure:[self requestFailureBlockWithModelRoute:modelRoute success:success failure:failure]];
+                     parameters:[self JSONPayloadForModel:model requestRoute:requestRoute]
+                        success:[self requestSuccessBlockWithResponseRoute:responseRoute success:success failure:failure]
+                        failure:[self requestFailureBlockWithFailure:failure]];
 }
 
 #pragma mark - Request Handlers
 
-- (void (^)(NSURLSessionDataTask *task, id responseObject))requestSuccessBlockWithModelRoute:(YYHModelRoute *)modelRoute
-                                                                                     success:(YYHModelRequestSuccess)success
-                                                                                     failure:(YYHModelRequestFailure)failure {
+- (void (^)(NSURLSessionDataTask *task, id responseObject))requestSuccessBlockWithResponseRoute:(YYHModelRoute *)responseRoute
+                                                                                        success:(YYHModelRequestSuccess)success
+                                                                                        failure:(YYHModelRequestFailure)failure {
     return ^(NSURLSessionDataTask *task, id responseObject) {
-        if (modelRoute.keyPath != nil) {
-            responseObject = [responseObject valueForKeyPath:modelRoute.keyPath];
+        if (responseRoute.keyPath != nil) {
+            responseObject = [responseObject valueForKeyPath:responseRoute.keyPath];
         }
         
         NSError *serializationError = nil;
-        id model = [self serializedModelForResponseObject:responseObject modelClass:modelRoute.modelClass error:&serializationError];
+        id model = responseRoute != nil ? [self serializedModelForResponseObject:responseObject modelClass:responseRoute.modelClass error:&serializationError] : nil;
         
         if (serializationError && failure) {
             failure(serializationError);
         }
         
-        if (success && model) {
+        if (success) {
             success(task, responseObject, model);
-        } else if (failure) {
-            NSDictionary *userInfo = @{
-                                       NSLocalizedDescriptionKey: NSLocalizedString(@"Model serialization failure", @""),
-                                       NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:NSLocalizedString(@"Model serialization resulted in nil value. Expected object of type %@ from the key path '%@'", @""), NSStringFromClass(modelRoute.modelClass), modelRoute.keyPath],
-                                       };
-            failure([NSError errorWithDomain:YYHModelRouterErrorDomain code:YYHModelRouterErrorSerialization userInfo:userInfo]);
         }
     };
 }
 
-- (void (^)(NSURLSessionDataTask *task, NSError *error))requestFailureBlockWithModelRoute:(YYHModelRoute *)modelRoute
-                                                                                  success:(YYHModelRequestSuccess)success
-                                                                                  failure:(YYHModelRequestFailure)failure {
+- (void (^)(NSURLSessionDataTask *task, NSError *error))requestFailureBlockWithFailure:(YYHModelRequestFailure)failure {
     return ^(NSURLSessionDataTask *task, NSError *error) {
         if (failure) {
             failure(error);
@@ -239,25 +293,24 @@ NSString * const YYHModelRouterErrorDomain = @"com.yayuhh.YYHModelRouterError";
 
 #pragma mark - Serialization - Request
 
-- (NSDictionary *)JSONPayloadForModel:(id)model {
+
+- (NSDictionary *)JSONPayloadForModel:(id)model requestRoute:(YYHModelRoute *)modelRoute {
     id modelJSON = [self modelJSONForModel:model];
-    
-    if (!modelJSON) {
-        return nil;
+
+    if (modelRoute.keyPath) {
+        NSMutableDictionary *payload = [[NSMutableDictionary alloc] init];
+        [payload setValue:modelJSON forKeyPath:modelRoute.keyPath];
+        return [payload copy];
+    } else {
+        return modelJSON;
     }
-    
-    NSMutableDictionary *jsonPayload = [[NSMutableDictionary alloc] init];
-    [jsonPayload setValue:modelJSON forKeyPath:nil];
-    return [jsonPayload copy];
 }
 
 - (id)modelJSONForModel:(id)model {
     if ([model isKindOfClass:[NSArray class]]) {
         return [self JSONArrayForModels:model];;
-    } else if ([model isKindOfClass:[NSDictionary class]]) {
-        return model;
     } else {
-        return nil;
+        return [self JSONDictionaryForModel:model];
     }
 }
 
